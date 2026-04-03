@@ -1,0 +1,16 @@
+{
+    "name": "iphp/php-kit",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Kit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "iphper",
+            "email": "igping@163.com"
+        }
+    ],
+    "require": {}
+}
