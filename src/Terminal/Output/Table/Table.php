@@ -135,9 +135,10 @@ class Table
     {
         empty($columnWidths) && ($columnWidths = $this->columnWidths);
 
-        foreach ($row as $col => $content) {
+        foreach ($columnWidths as $col => $width) {
+            $content = $row[$col] ?? '';
             echo $this->cellBorder;
-            echo $this->renderColumnContent($content, $columnWidths[$col] - 1);
+            echo $this->renderColumnContent($content, $width - 1);
         }
 
         echo $this->cellBorder, PHP_EOL;
@@ -146,7 +147,7 @@ class Table
     // 渲染表头
     protected function renderHeader()
     {
-        if ($this->header) {
+        if (array_sum(array_map('count', $this->header))) {
             foreach($this->header as $row) {
                 $this->renderRow($row);
             }
@@ -165,7 +166,7 @@ class Table
     // 渲染表尾
     protected function renderFooter()
     {
-        if ($this->footer) {
+        if (array_sum(array_map('count', $this->footer))) {
             $this->renderRowBorder();
             foreach ($this->footer as $row) {
                 $this->renderRow($row, $this->footerColumnWidths);

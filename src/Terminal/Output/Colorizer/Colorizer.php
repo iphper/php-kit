@@ -24,6 +24,22 @@ class Colorizer
     }
 
     /**
+     * 前景色别名
+     */
+    public function foreground($rOrHexOrArray, ?int $g = null, ?int $b = null): self
+    {
+        return $this->fg($rOrHexOrArray, $g, $b);
+    }
+
+    /**
+     * 设置前景色别名
+     */
+    public function color($rOrHexOrArray, ?int $g = null, ?int $b = null): self
+    {
+        return $this->fg($rOrHexOrArray, $g, $b);
+    }
+
+    /**
      * 设置背景色（参数规则同 fg）
      *
      * @param int|string|array $rOrHexOrArray
@@ -35,6 +51,14 @@ class Colorizer
     {
         $this->backRgb = $this->toRgb($rOrHexOrArray, $g, $b);
         return $this;
+    }
+
+    /**
+     * 背景色别名
+     */
+    public function background($rOrHexOrArray, ?int $g = null, ?int $b = null): self
+    {
+        return $this->bg($rOrHexOrArray, $g, $b);
     }
 
     /**
@@ -70,6 +94,49 @@ class Colorizer
         }
 
         return "\033[" . implode(';', $parts) . "m{$text}\033[0m";
+    }
+
+    /**
+     * 直接输出带颜色的文本
+     */
+    public function print(string $text): void
+    {
+        echo $this->text($text);
+    }
+
+    /**
+     * print 的换行版本
+     */
+    public function println(string $text): void
+    {
+        echo $this->text($text) . PHP_EOL;
+    }
+
+    /**
+     * printf 版本，支持格式化字符串和变参
+     */
+    public function printf(string $format, ...$args): void
+    {
+        $text = sprintf($format, ...$args);
+        $this->print($text);
+    }
+
+    /**
+     * printf 的换行版本
+     */
+    public function printfn(string $format, ...$args): void
+    {
+        $text = sprintf($format, ...$args);
+        $this->println($text);
+    }
+
+    /**
+     * 变参版本的 printf，接受一个数组参数
+     */
+    public function vprintf(string $format, $argv)
+    {
+        $text = vsprintf($format, $argv);
+        $this->print($text);
     }
 
     // ========== 内部辅助 ==========
