@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Kit\Terminal\Output\Table\Table;
+use Kit\Terminal\Output\Table\Facade;
 
 $table = new Table([
     'width' => 100,
@@ -23,3 +24,5 @@ $table = new Table([
     ],
 ]);
 $table->render();
+
+
