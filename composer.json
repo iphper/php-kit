@@ -1,5 +1,5 @@
 {
-    "name": "iphp/php-kit",
+    "name": "iphper/php-kit",
     "type": "library",
     "autoload": {
         "psr-4": {
